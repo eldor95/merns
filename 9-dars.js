@@ -14,7 +14,7 @@ const num = 4 + "radio";
 console.log(typeof num);
 
 let z = 10;
-
+//asasfe
 console.log(++z);
 console.log(z++);
 console.log(z);
