@@ -4,6 +4,8 @@ const p = document.querySelectorAll("p");
 
 console.log(p);
 
+// Script ga dinamik qushish
+
 function scriptt(scrip) {
   const script = document.createElement("script");
 
