@@ -13,6 +13,7 @@ box-sizing: border-box;
   justify-content: center;
   align-items: center;
   background: linear-gradient(45deg,#45673b,#653c6a);
+  transition: all 0.5s ease;
 }
 .lds-roller {
   display: inline-block;
