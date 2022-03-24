@@ -73,7 +73,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  const modalTimer = setTimeout(openModal, 5000);
+  // const modalTimer = setTimeout(openModal, 5000);
 
   function showMyModalByScroll() {
     if (
@@ -84,18 +84,18 @@ window.addEventListener("DOMContentLoaded", () => {
       window.removeEventListener("scroll", showMyModalByScroll);
     }
   }
-  window.addEventListener("scroll", showMyModalByScroll);
+  // window.addEventListener("scroll", showMyModalByScroll);
 
   //  DATA
 
-  const deadLine = "2022-03-24";
+  const deadLine = "2022-03-28";
 
   function getTime(endtime) {
     const total = Date.parse(endtime) - Date.parse(new Date()),
       days = Math.floor(total / (1000 * 60 * 60 * 24)),
       seconds = Math.floor((total / 1000) % 60),
       minutes = Math.floor((total / (1000 * 60)) % 60),
-      hours = Math.floor((total / (1000 * 60 * 60)) % 60);
+      hours = Math.floor((total / (1000 * 60 * 60)) % 24);
     return {
       total: total,
       days: days,
@@ -213,4 +213,68 @@ window.addEventListener("DOMContentLoaded", () => {
     40,
     ".menu .container"
   ).render();
+
+  // ========= SLIDER FIRST WAY EASY==============
+
+  const slides = document.querySelectorAll(".offer__slide"),
+    prev = document.querySelector(".offer__slider-prev"),
+    next = document.querySelector(".offer__slider-next"),
+    current = document.querySelector("#current"),
+    total = document.querySelector("#total");
+
+  let slideIndex = 1;
+  show(slideIndex);
+
+  function show(s) {
+    if (s > slides.length) {
+      slideIndex = 1;
+    }
+    if (s < 1) {
+      slideIndex = slides.length;
+    }
+    slides.forEach((item) => {
+      item.style.cssText = "display: none";
+    });
+    slides[slideIndex - 1].style.display = "block";
+    if (slides.length < 10) {
+      current.textContent = `0${slideIndex}`;
+    } else {
+      current.textContent = slideIndex;
+    }
+  }
+  function sliderPlus(s) {
+    show((slideIndex += s));
+  }
+
+  prev.addEventListener("click", () => {
+    sliderPlus(-1);
+  });
+  next.addEventListener("click", () => {
+    sliderPlus(1);
+  });
+
+  // const slides = document.querySelectorAll(".offer__slide"),
+  //   prev = document.querySelector(".offer__slider-prev"),
+  //   next = document.querySelector(".offer__slider-next"),
+  //   current = document.querySelector("#current"),
+  //   total = document.querySelector("#total");
+
+  // ===================== ACCORDION ==============//
+
+  const inner = document.querySelector(".inner"),
+    accordion = document.querySelectorAll(".accordion");
+  let i = 0;
+  // panel = document.querySelectorAll(".panel");
+
+  accordion.forEach((acc) => {
+    acc.addEventListener("click", () => {
+      acc.classList.toggle("active");
+      const panel = acc.nextElementSibling;
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
+    });
+  });
 });
